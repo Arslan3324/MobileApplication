@@ -35,7 +35,7 @@
             android:layout_margin="2dp"
             android:layout_weight="1"
             android:onClick="showImg"
-            android:tag="pile_1"
+            android:tag="0"
             app:srcCompat="@drawable/back_cover" />
 
         <ImageView
@@ -44,8 +44,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
+            android:longClickable="false"
             android:onClick="showImg"
-            android:tag="pile_2"
+            android:tag="1"
             app:srcCompat="@drawable/back_cover" />
 
         <ImageView
@@ -55,7 +56,7 @@
             android:layout_margin="2dp"
             android:layout_weight="1"
             android:onClick="showImg"
-            android:tag="pile_3"
+            android:tag="2"
             app:srcCompat="@drawable/back_cover" />
 
         <ImageView
@@ -65,7 +66,7 @@
             android:layout_margin="2dp"
             android:layout_weight="1"
             android:onClick="showImg"
-            android:tag="pile_4"
+            android:tag="3"
             app:srcCompat="@drawable/back_cover" />
 
         <ImageView
@@ -75,7 +76,7 @@
             android:layout_margin="2dp"
             android:layout_weight="1"
             android:onClick="showImg"
-            android:tag="pile_5"
+            android:tag="4"
             app:srcCompat="@drawable/back_cover" />
     </LinearLayout>
 
@@ -105,7 +106,7 @@
             android:layout_margin="2dp"
             android:layout_weight="1"
             android:onClick="showImg"
-            android:tag="pile_6"
+            android:tag="5"
             app:srcCompat="@drawable/back_cover" />
 
         <ImageView
@@ -115,7 +116,7 @@
             android:layout_margin="2dp"
             android:layout_weight="1"
             android:onClick="showImg"
-            android:tag="pile_7"
+            android:tag="6"
             app:srcCompat="@drawable/back_cover" />
 
         <ImageView
@@ -125,7 +126,7 @@
             android:layout_margin="2dp"
             android:layout_weight="1"
             android:onClick="showImg"
-            android:tag="pile_8"
+            android:tag="7"
             app:srcCompat="@drawable/back_cover" />
 
         <ImageView
@@ -135,7 +136,7 @@
             android:layout_margin="2dp"
             android:layout_weight="1"
             android:onClick="showImg"
-            android:tag="pile_9"
+            android:tag="8"
             app:srcCompat="@drawable/back_cover" />
 
         <ImageView
@@ -145,7 +146,7 @@
             android:layout_margin="2dp"
             android:layout_weight="1"
             android:onClick="showImg"
-            android:tag="pile_10"
+            android:tag="9"
             app:srcCompat="@drawable/back_cover" />
     </LinearLayout>
 
