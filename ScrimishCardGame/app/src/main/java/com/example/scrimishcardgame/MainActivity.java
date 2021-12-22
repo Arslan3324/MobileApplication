@@ -1,21 +1,33 @@
 package com.example.scrimishcardgame;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.material.snackbar.Snackbar;
 
+public class MainActivity extends AppCompatActivity
+{
+    TextView turnLabel ;
+    boolean user_1 = true;
+    LinearLayout layout;
     Pile[] piles = new Pile[10];
+    TextView[] views = new TextView[10];
     Pile pile_0;
     Pile pile_1;
     Pile pile_2;
@@ -27,11 +39,30 @@ public class MainActivity extends AppCompatActivity {
     Pile pile_8;
     Pile pile_9;
 
+    int attackerIndex;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
+        layout =  findViewById(R.id.layout);
+        turnLabel =  findViewById(R.id.textView2);
+        turnLabel.setText("Player 1 turn ");
+        views[0] =  findViewById(R.id.textView4);
+        views[1] =  findViewById(R.id.textView5);
+        views[2] =  findViewById(R.id.textView6);
+        views[3] =  findViewById(R.id.textView7);
+        views[4] =  findViewById(R.id.textView8);
+
+        views[5] =  findViewById(R.id.textView9);
+        views[6] =  findViewById(R.id.textView10);
+        views[7] =  findViewById(R.id.textView11);
+        views[8] =  findViewById(R.id.textView12);
+        views[9] =  findViewById(R.id.textView13);
+
         setGameData();
         setImagesOfGame();
         View.OnLongClickListener attack = new View.OnLongClickListener() {
@@ -39,15 +70,39 @@ public class MainActivity extends AppCompatActivity {
             public boolean onLongClick(View v) {
                 String s = v.getTag().toString();
                 Integer index = Integer.parseInt(s);
-                piles[index].removeTop();
 
-                Toast.makeText(getApplicationContext(), "Attack", Toast.LENGTH_LONG).show();
+                if(index>4 && user_1)
+                {
+                    Snackbar.make(layout, "user 2 can't play when user one has turn", Snackbar.LENGTH_LONG ).show();
+                    return true;
+                }
+                else if(index<=4 && user_1)
+                {
+                    attackerIndex = Integer.parseInt(v.getTag().toString());
+                    openDialog();
+                }
+                else if(index<4 && user_1 == false)
+                {
+                    Snackbar.make(layout, "user 1 can't play when user two has turn", Snackbar.LENGTH_LONG ).show();
+                    return true;
+                }
+                else if(index>4 && user_1 == false)
+                {
+                    attackerIndex = Integer.parseInt(v.getTag().toString());
+                    openDialog();
+                }
+
+
+//                String s = v.getTag().toString();
+//                Integer index = Integer.parseInt(s);
+//                piles[index].removeTop();
+//
+//                Toast.makeText(getApplicationContext(), "Attack", Toast.LENGTH_LONG).show();
                 return true;
             }
         };
         findViewById(R.id.imageView).setOnLongClickListener(attack);
         findViewById(R.id.imageView2).setOnLongClickListener(attack);
-        findViewById(R.id.imageView3).setOnLongClickListener(attack);
         findViewById(R.id.imageView3).setOnLongClickListener(attack);
         findViewById(R.id.imageView4).setOnLongClickListener(attack);
         findViewById(R.id.imageView5).setOnLongClickListener(attack);
@@ -59,6 +114,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    CustomDialog dialog = new CustomDialog();
+
+    private void openDialog() {
+        dialog.show(getSupportFragmentManager(), "Select Pile ");
+    }
+
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -80,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setGameData()
     {
-
         Card crown = new Card("crown",100,R.drawable.crown);
         Card archer = new Card("archer",10,R.drawable.archer);
         Card shield = new Card("shield",0,R.drawable.sheild);
@@ -92,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
         Card halberd = new Card("halberd",5,R.drawable.five);
         Card longSword = new Card("longSword",6,R.drawable.six);
 
-
         for (int i=0; i<10; i++)
         {
             piles[i] = new Pile(i);
@@ -101,9 +160,7 @@ public class MainActivity extends AppCompatActivity {
             piles[i].addCard(sword);
             piles[i].addCard(star);
             piles[i].addCard(axe);
-
-
-
+            views[i].setText(String.valueOf(piles[i].counter));
         }
 //        pile_0 = new Pile(0);
 //        pile_0.addCard(crown);
@@ -119,15 +176,117 @@ public class MainActivity extends AppCompatActivity {
     {
         String s = view.getTag().toString();
         Integer index = Integer.parseInt(s);
-        ImageView imageView =  (ImageView) view;
-        imageView.setImageResource(piles[index].showTop().picture);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        if(index>4 && user_1)
+        {
+//            Toast.makeText(getApplicationContext(),"user 2 can't see when user one has turn",Toast.LENGTH_LONG).show();
+            Snackbar.make(layout, "user 2 can't see when user one has turn", Snackbar.LENGTH_LONG ).show();
 
-            @Override
-            public void run() {
-                imageView.setImageResource(R.drawable.back_cover);
             }
-        },1500);
+        else if(index<=4 && user_1)
+        {
+
+
+
+            ImageView imageView =  (ImageView) view;
+            imageView.setImageResource(piles[index].showTop().picture);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    imageView.setImageResource(R.drawable.back_cover);
+                }
+            },1500);
+        }
+        else if(index<=4 && user_1 == false)
+        {
+            Snackbar.make(layout, "user 1 can't see when user two has turn", Snackbar.LENGTH_LONG ).show();
+
+        }
+        else if(index>4 && user_1 == false)
+        {
+
+
+            ImageView imageView =  (ImageView) view;
+            imageView.setImageResource(piles[index].showTop().picture);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    imageView.setImageResource(R.drawable.back_cover);
+                }
+            },1500);
+        }
+
+
+
     }
+
+
+    public void attackOnPile(View view)
+    {
+        Button button = (Button)view;
+
+        String s = button.getText().toString();
+        Integer index = Integer.parseInt(s);
+
+        if(user_1)
+        {
+            index+=5;
+        }
+//        Toast.makeText(this,"Clicked "+ button.getText().toString(),Toast.LENGTH_LONG).show();
+//        piles[index - 1].attacked()
+//        Snackbar.make(layout, "attacker  " +attackerIndex + " attacked on  "+ (index-1)   , Snackbar.LENGTH_LONG ).setAction("Close", new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v)
+//            {
+//
+//            }
+//        }).show();
+        int attackedResult = piles[index - 1].attacked(piles[attackerIndex].showTop());
+        switch (attackedResult)
+        {
+            case 1:
+            case 0:
+                piles[attackerIndex].removeTop();
+                break;
+            case -1:
+                break;
+            case -10:
+                if(user_1)
+                {
+                    Toast.makeText(getApplicationContext(),"User 1 has won", Toast.LENGTH_LONG).show();
+                }
+                else
+                    Toast.makeText(getApplicationContext(),"User 2 has won", Toast.LENGTH_LONG).show();
+                break;
+        }
+//            Card card = piles[index - 1].removeTop();
+
+        views[attackerIndex].setText(String.valueOf(piles[attackerIndex].counter));
+        views[index-1].setText(String.valueOf(piles[index-1].counter));
+        dialog.dismiss();
+//        if(card.getName()=="crown")
+//        {
+//
+//            layout.setEnabled(false);
+//        }
+
+//            Snackbar.make(layout, "Clicked  "+ button.getText().toString(), Snackbar.LENGTH_LONG ).setAction("Close", new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v)
+//            {
+//
+//            }
+//        }).show();
+        if(user_1)
+        turnLabel.setText("Player 2 turn ");
+        else
+            turnLabel.setText("Player 1 turn ");
+        user_1 = !user_1;
+    }
+
+
+
 }
