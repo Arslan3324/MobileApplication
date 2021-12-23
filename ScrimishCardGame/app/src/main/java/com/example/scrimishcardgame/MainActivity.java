@@ -5,9 +5,11 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -20,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -40,13 +44,23 @@ public class MainActivity extends AppCompatActivity
     Pile pile_9;
 
     int attackerIndex;
+    ArrayList<Card> player_one_cards;
+    ArrayList<Card> player_two_cards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
+
         setContentView(R.layout.activity_main);
+
+        Intent intent = getIntent();
+        player_one_cards = intent.getParcelableArrayListExtra("player_one_cards");
+        player_two_cards = intent.getParcelableArrayListExtra("player_two_cards");
+        Log.d(TAG, "onCreate: player one cards "+player_one_cards.size());
+        Log.d(TAG, "onCreate: player two cards "+player_two_cards.size());
+
 
         layout =  findViewById(R.id.layout);
         turnLabel =  findViewById(R.id.textView2);
@@ -152,14 +166,14 @@ public class MainActivity extends AppCompatActivity
         Card halberd = new Card("halberd",5,R.drawable.five);
         Card longSword = new Card("longSword",6,R.drawable.six);
 
+
+        for (Card card: player_one_cards) {
+
+        }
         for (int i=0; i<10; i++)
         {
             piles[i] = new Pile(i);
-            piles[i].addCard(crown);
-            piles[i].addCard(dagger);
-            piles[i].addCard(sword);
-            piles[i].addCard(star);
-            piles[i].addCard(axe);
+
             views[i].setText(String.valueOf(piles[i].counter));
         }
 //        pile_0 = new Pile(0);
