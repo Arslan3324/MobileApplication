@@ -1,0 +1,4 @@
+com/example/torchapp/MainActivity.java
+ com.example.torchapp.MainActivity
+com/example/torchapp/BuildConfig.java
+ com.example.torchapp.BuildConfig

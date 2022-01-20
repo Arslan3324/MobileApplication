@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/eyeimg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/eyes" />
+
+    <ImageView
+        android:id="@+id/gimg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/glasses" />
+
+    <ImageView
+        android:id="@+id/himg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/hat" />
+
+    <CheckBox
+        android:id="@+id/eyes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="eyes"
+        android:text="Eyes" />
+
+    <CheckBox
+        android:id="@+id/glass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="glass"
+        android:text="Glasses" />
+
+    <CheckBox
+        android:id="@+id/hat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="hat"
+        android:text="Hat" />
+
+</LinearLayout>

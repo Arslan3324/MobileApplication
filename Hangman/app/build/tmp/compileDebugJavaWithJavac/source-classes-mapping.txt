@@ -1,0 +1,8 @@
+com/example/hangman/MainActivity.java
+ com.example.hangman.MainActivity
+com/example/hangman/BuildConfig.java
+ com.example.hangman.BuildConfig
+com/example/hangman/mainGame.java
+ com.example.hangman.mainGame
+com/example/hangman/howToPlay.java
+ com.example.hangman.howToPlay

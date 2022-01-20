@@ -1,0 +1,4 @@
+com/example/potatogame/BuildConfig.java
+ com.example.potatogame.BuildConfig
+com/example/potatogame/MainActivity.java
+ com.example.potatogame.MainActivity

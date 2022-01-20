@@ -49,9 +49,10 @@ public class activity_game extends AppCompatActivity {
         }
 
     }
-    public void selectCard(View v){
-        ImageView _ = (ImageView)v;
-        if(cardPicked>24 || _.getTag().equals("cover"))
+    public void selectCard(View v)
+    {
+        ImageView v1 = (ImageView)v;
+        if(cardPicked>24 || v1.getTag().equals("cover"))
             return;
         //Create ImageView obj
         ImageView imageView = new ImageView(this);
@@ -61,9 +62,6 @@ public class activity_game extends AppCompatActivity {
         layoutParams.setMargins(0,0,0,fifteen);
         fifteen-=10;
         imageView.setLayoutParams(layoutParams);
-
-
-
 
         //get the imageView clicked
         ImageView im = (ImageView)v;
